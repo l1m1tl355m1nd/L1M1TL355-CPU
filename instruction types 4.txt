@@ -1,0 +1,147 @@
+instruction types 4
+
+Immediate Instructions
+
+
+Name: Store Immediate Value
+	In Code: Store[IMM] (Register, Number)
+	Instructions Register Numbers Write_en
+	5            5        21      1
+Opcode [00000]
+
+
+Name: Arithmetic
+	In Code: Arith[IMM, type] ()
+	Instruction Register Switch Numerical Borrow/Carry Write_en
+	5           5        3      17        1            1
+Opcode [00001]
+
+		Name: Add
+			In code: Arith[IMM, ADD] (Register, Number, Carry)
+			switch [000]
+
+		Name: Subtract
+			In code: Arith[IMM, SUB] (Register, Number, Borrow)
+			switch [001]
+
+		Name: Compare
+			In code: Arith[IMM, COM] (Register, Number)
+			switch [010]
+
+		Name: Left
+			In code: Arith[IMM, LFT] (Register, Number)
+			switch [011]
+
+		Name: Right
+			In code: Arith[IMM, RGT] (Register, Number)
+			switch [100]
+
+		Name: Logical AND
+			In code: Arith[IMM, AND] (Register, Number)
+			switch [101]
+
+		Name: Logical OR
+			In code: Arith[IMM, LOR] (Register, Number)
+			switch [110]
+
+		Name: Logical XOR
+			In code: Arith[IMM, XOR] (Register, Number)
+			switch [111]
+
+
+Name: Register Store
+	In code:  Store[REG] (Register 1, Register 2, Switch)
+	Instruction Register1 Register2 Switch Write_en Unused
+	5           5         5         1      1        15
+Opcode [00010]
+		Name: Store In Register
+			In code: Store[REG] (Register 1, Register 2, Switch)
+			Switch [0]
+		Name: Store Out
+			In code: Store[OUT]
+			Switch [1]
+
+
+Name: Compare Jump
+	In code: Jump[H] (Register 1, Register 2, condition, Location_Register)
+	Instruction Register1 Register2 Condition  Loc_Register Unused
+	5           5         5         4          5            8
+Opcode [00011]
+
+		Name: Compare Jump Low
+			In code: Jump[H] (Register 1, Register 2, LOW, Location_Register)
+			not  Condition [0], [000]
+
+		Name: Compare Jump High
+			In code: Jump[H] (Register 1, Register 2, ABV, Location_Register)
+			not  Condition [0], [001]
+
+		Name: Compare Jump Equal
+			In code: Jump[H] (Register 1, Register 2, EQL, Location_Register)
+			not  Condition [0], [010]
+
+		Name: Compare Jump Zero
+			In code: Jump[H] (Register 1, Register 2, ZRO, Location_Register)
+			not  Condition [0], [011]
+
+		Name: Compare Jump Not Low
+			In code: Jump[H] (Register 1, Register 2, NLO, Location_Register)
+			not  Condition [1], [000]
+
+
+		Name: Compare Jump Not High
+			In code: Jump[H] (Register 1, Register 2, NAB, Location_Register)
+			not  Condition [1], [001]
+
+
+		Name: Compare Jump Not Equal
+			In code: Jump[H] (Register 1, Register 2, NEQ, Location_Register)
+			not  Condition [1], [010]
+
+
+		Name: Compare Jump Not Zero
+			In code: Jump[H] (Register 1, Register 2, NZR, Location_Register)
+			not  Condition [1], [011]
+
+
+		Name: Jump Unconditional
+			In code: Jump[H] (Register 1, Register 2, UNC, Location_Register)
+			not  Condition [0], [100]
+
+Name: Register Arithmetic
+	In code: Arith[REG, type] (Register 1, Register 2)
+	Instruction Register Switch Register 2 Carry/Borrow write_en  Unused
+	5           5        3      5          1            1         12
+Opcode [00100]
+
+		Name: Add
+			In code: Arith[IMM, ADD] (Register, Register 2, Carry)
+			switch [000]
+
+		Name: Subtract
+			In code: Arith[IMM, SUB] (Register, Register 2, Borrow)
+			switch [001]
+
+		Name: Compare
+			In code: Arith[IMM, COM] (Register, Register 2)
+			switch [010]
+
+		Name: Left
+			In code: Arith[IMM, LFT] (Register, Register 2)
+			switch [011]
+
+		Name: Right
+			In code: Arith[IMM, RGT] (Register, Register 2)
+			switch [100]
+
+		Name: Logical AND
+			In code: Arith[IMM, AND] (Register, Register 2)
+			switch [101]
+
+		Name: Logical OR
+			In code: Arith[IMM, LOR] (Register, Register 2)
+			switch [110]
+
+		Name: Logical XOR
+			In code: Arith[IMM, XOR] (Register, Register 2)
+			switch [111]

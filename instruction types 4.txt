@@ -12,8 +12,8 @@ Opcode [00000]
 
 Name: Arithmetic
 	In Code: Arith[IMM, type] ()
-	Instruction Register Switch Numerical Borrow/Carry Write_en
-	5           5        3      17        1            1
+	Instruction Register Switch Numerical Comp_Switch Borrow/Carry Write_en
+	5           5        3      13        3           1            1
 Opcode [00001]
 
 		Name: Add
@@ -25,7 +25,7 @@ Opcode [00001]
 			switch [001]
 
 		Name: Compare
-			In code: Arith[IMM, COM] (Register, Number)
+			In code: Arith[IMM, COM] (Register, Number, Comp_Switch) (im not going over all of that stuff right now)
 			switch [010]
 
 		Name: Left
@@ -51,7 +51,7 @@ Opcode [00001]
 
 Name: Register Store
 	In code:  Store[REG] (Register 1, Register 2, Switch)
-	Instruction Register1 Register2 Write_en Switch Unused   (swapped because I wired it differently already)
+	Instruction Register1 Register2 Write_en Switch Unused
 	5           5         5         1        1      15
 Opcode [00010]
 		Name: Store In Register
@@ -145,3 +145,49 @@ Opcode [00100]
 		Name: Logical XOR
 			In code: Arith[IMM, XOR] (Register, Register 2)
 			switch [111]
+
+Name: Compare Jump with return address
+	In code: Jump[R] (Register 1, Register 2, condition, Location_Register)
+	Instruction Register1 Register2 Condition  Loc_Register Return_register  Unused
+	5           5         5         4          5            5                3
+Opcode [00101]
+
+		Name: Compare Jump Low
+			In code: Jump[R] (Register 1, Register 2, LOW, Location_Register, Return_register)
+			not  Condition [0], [000]
+
+		Name: Compare Jump High
+			In code: Jump[R] (Register 1, Register 2, ABV, Location_Register, Return_register)
+			not  Condition [0], [001]
+
+		Name: Compare Jump Equal
+			In code: Jump[R] (Register 1, Register 2, EQL, Location_Register, Return_register)
+			not  Condition [0], [010]
+
+		Name: Compare Jump Zero
+			In code: Jump[R] (Register 1, Register 2, ZRO, Location_Register, Return_register)
+			not  Condition [0], [011]
+
+		Name: Compare Jump Not Low
+			In code: Jump[R] (Register 1, Register 2, NLO, Location_Register, Return_register)
+			not  Condition [1], [000]
+
+
+		Name: Compare Jump Not High
+			In code: Jump[R] (Register 1, Register 2, NAB, Location_Register, Return_register)
+			not  Condition [1], [001]
+
+
+		Name: Compare Jump Not Equal
+			In code: Jump[R] (Register 1, Register 2, NEQ, Location_Register, Return_register)
+			not  Condition [1], [010]
+
+
+		Name: Compare Jump Not Zero
+			In code: Jump[R] (Register 1, Register 2, NZR, Location_Register, Return_register)
+			not  Condition [1], [011]
+
+
+		Name: Jump Unconditional
+			In code: Jump[R	] (Register 1, Register 2, UNC, Location_Register, Return_register)
+			not  Condition [0], [100]

@@ -17,7 +17,7 @@ This is my personal beginning project on everything computer logic. I learned wh
 ## Current Features
 
 - Some basic stuff in `New_Computer_project.circ`
-- Rough instruction set (see `instruction types 4.txt`)
+- <a href="https://l1m1tl355m1nd.github.io/L1M1TL355-CPU/">Instruction set</a>
 - Various progress photos and diagrams (in `images/`)
 - A cool header image that makes it look like I know what I'm doing (spoiler: I don't)
 
@@ -29,10 +29,12 @@ This is my personal beginning project on everything computer logic. I learned wh
 
 ## How to follow along / contribute
 
-This repo is mostly a public brain-dump right now, feel free to:
+This repo is mostly a public brain dump right now. Feel free to:
 
 - Watch/star if you're curious
 - Open issues with advice, resources, or "you forgot to do something."
+- Give advice on where you think I should go.
+- Support me by donating to my future Ko-fi so I can work on this more.
 
 This is a solo learning project for now.
 

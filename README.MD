@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="github/header.png" alt="L1M1TL355 CPU Header" width="600"/>
+  <img src=".github/header.png" alt="L1M1TL355 CPU Header" width="600"/>
 </p>
 
 <h1 align="center">L1M1TL355-CPU</h1>

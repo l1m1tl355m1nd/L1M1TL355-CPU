@@ -300,6 +300,21 @@ footer {
         <li><strong>LOR</strong> — <code>Arith[IMM, LOR] (Reg, Num)</code> — <span class="opcode">110</span></li>
         <li><strong>XOR</strong> — <code>Arith[IMM, XOR] (Reg, Num)</code> — <span class="opcode">111</span></li>
       </ul>
+
+            <div class="note">
+        Condition outputs all 1s if the condition is met. <br><br> The conditions are:
+        <ul class="variant-list">
+        <li><strong>LOW</strong> — below — [0, 000]</li>
+        <li><strong>ABV</strong> — above — [0, 001]</li>
+        <li><strong>EQL</strong> — equal — [0, 010]</li>
+        <li><strong>ZRO</strong> — zero — [0, 011]</li>
+        <li><strong>NLO</strong> — not low — [1, 000]</li>
+        <li><strong>NAB</strong> — not above — [1, 001]</li>
+        <li><strong>NEQ</strong> — not equal — [1, 010]</li>
+        <li><strong>NZR</strong> — not zero — [1, 011]</li>
+        <li><strong>UNC</strong> — unconditional — [0, 100]</li>
+      </ul>
+      </div>
     </section>
 
     <section id="store-reg">
@@ -312,8 +327,7 @@ footer {
         <tr><td>Register1</td><td>5</td><td>Source</td></tr>
         <tr><td>Register2</td><td>5</td><td>Destination if REG, not used if OUT</td></tr>
         <tr><td>Write Enable</td><td>1</td><td>—</td></tr>
-        <tr><td>Switch</td><td>1</td><td>0 = reg store, 1 = out</td></tr>
-        <tr><td>Unused</td><td>14</td><td>—</td></tr>
+        <tr><td>Switch</td><td>15</td><td>0 = reg store, 1 - 14 = out (encoded for 15-bit addressing out from pins)</td></tr>
       </table>
 
       <ul class="variant-list">
@@ -349,26 +363,9 @@ footer {
         <li><strong>Logical OR</strong> — <code>Arith[REG, LOR] (R1, R2)</code> — <span class="opcode">110</span></li>
         <li><strong>Logical XOR</strong> — <code>Arith[REG, XOR] (R1, R2)</code> — <span class="opcode">111</span></li>
       </ul>
-    </section>
-
-    <section id="jump">
-      <h2>5. Compare Jump with Return Address</h2>
-      <p>Assembly: <code>Jump[R] (R1, R2, cond, Loc_Reg, Ret_Reg)</code></p>
-
-      <table>
-        <tr><th>Field</th><th>Bits</th><th>Description</th></tr>
-        <tr><td>Opcode</td><td>00100</td><td>—</td></tr>
-        <tr><td>Register1</td><td>5</td><td>Left compare operand</td></tr>
-        <tr><td>Register2</td><td>5</td><td>Right compare operand</td></tr>
-        <tr><td>Condition</td><td>4</td><td>Which condition to output true/false</td></tr>
-        <tr><td>Loc Register</td><td>5</td><td>Jump target address register</td></tr>
-        <tr><td>Return Register</td><td>5</td><td>Register to save return PC</td></tr>
-        <tr><td>Return Address Switch</td><td>1</td><td>Whether or not saves return address</td></tr>
-        <tr><td>Unused</td><td>2</td><td>—</td></tr>
-      </table>
-
-      <h3>Conditions</h3>
-      <ul class="variant-list">
+      <div class="note">
+        Condition outputs all 1s if the condition is met. <br><br> The conditions are:
+        <ul class="variant-list">
         <li><strong>LOW</strong> — below — [0, 000]</li>
         <li><strong>ABV</strong> — above — [0, 001]</li>
         <li><strong>EQL</strong> — equal — [0, 010]</li>
@@ -379,10 +376,20 @@ footer {
         <li><strong>NZR</strong> — not zero — [1, 011]</li>
         <li><strong>UNC</strong> — unconditional — [0, 100]</li>
       </ul>
-
-      <div class="note">
-        Supports conditional branching with link (call-like behavior) by saving the return address.
       </div>
+    </section>
+
+    <section id="jump">
+      <h2>5. Compare Jump</h2>
+      <p>Assembly: <code>Jump[R] (R1, R2)</code></p>
+
+      <table>
+        <tr><th>Field</th><th>Bits</th><th>Description</th></tr>
+        <tr><td>Opcode</td><td>00100</td><td>—</td></tr>
+        <tr><td>Condition Register</td><td>5</td><td>If all bits 1, jump</td></tr>
+        <tr><td>Location Register</td><td>5</td><td>Jump target address register</td></tr>
+        <tr><td>Unused</td><td>17</td><td>—</td></tr>
+      </table>
     </section>
 
       </section>
